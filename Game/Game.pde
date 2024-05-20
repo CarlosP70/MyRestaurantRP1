@@ -1,6 +1,6 @@
 /* Game Class Starter File
- * Authors: Joel A. Bianchi
- * Last Edit: 5/13/2024
+ * Authors: Carlos Perez | Justin Avila
+ * Last Edit: 5/20/2024
  */
 
 //import processing.sound.*;
@@ -80,6 +80,7 @@ void setup() {
   // mainGrid.addSpriteCopyTo(exampleSprite);
   mainGrid.printSprites();
   System.out.println("Done adding sprites to main world..");
+
   
   //Other Setup
   // Load a soundfile from the /data folder of the sketch and play it back
@@ -90,7 +91,7 @@ void setup() {
   //fullScreen();   //only use if not using a specfic bg image
   println("Game started...");
 
-} //end setup()
+}
 
 //Required Processing method that automatically loops
 //(Anything drawn on the screen should be called from here)
@@ -114,8 +115,7 @@ void draw() {
   msElapsed +=100;
   currentScreen.pause(100);
 
-} //end draw()
-
+}
 
 //Known Processing method that automatically will run whenever a key is pressed
 void keyPressed(){
