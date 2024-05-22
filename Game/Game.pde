@@ -118,8 +118,6 @@ void draw() {
   }
 
 }
-//------------------ USER INPUT METHODS --------------------//
-
 
 //Known Processing method that automatically will run whenever a key is pressed
 void keyPressed(){
