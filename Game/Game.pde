@@ -24,7 +24,7 @@ PImage splashBg;
 
 //Level1 Screen Variables
 Grid mainGrid;
-String mainBgFile = "images/restaurantwallpaper.jpg";
+String mainBgFile = "images/Background_V1.png";
 PImage mainBg;
 
 PImage player1;
