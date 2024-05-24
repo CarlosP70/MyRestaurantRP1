@@ -9,8 +9,8 @@
 
 //Title Bar
 private int msElapsed = 0;
-String titleText = "HorseChess";
-String extraText = "Who's Turn?";
+String titleText = "Crazy Chef";
+String extraText = "";
 
 //Current Screens
 Screen currentScreen;
