@@ -28,7 +28,7 @@ String mainBgFile = "images/restaurantwallpaper.jpg";
 PImage mainBg;
 
 PImage player1;
-String player1File = "images/Chef_Player.png";
+String player1File = "images/Chef_Player_2.gif";
 int player1Row = 3;
 int health = 3;
 
