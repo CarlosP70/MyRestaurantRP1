@@ -28,7 +28,7 @@ String player1File = "images/Chef_Player_2.gif";
 int player1Row = 3;
 int player1Col = 0;
 int health = 3;
-
+Button b1 = new Button("rect", 400, 500, 100, 50, "GoToLevel2");
 AnimatedSprite enemySprite;
 
 
@@ -80,20 +80,20 @@ void setup() {
   level2Bg = loadImage(level2BgFile);
   level2Bg.resize(800,600);
   endBg = loadImage(endBgFile);
-  endBg.resize(800,600);
+  endBg.resize(800,600);  //------------------ OTHER GRID METHODS --------------------//
+
 
   //setup the screens/worlds/grids in the Game
   splashScreen = new Screen("splash", splashBg);
   level1Grid = new Grid("chessBoard", level1Bg, 6, 8);
-  level2World = new World("sky", level2Bg);
+  level2World = new World("sky", level2BgFile, 8.0, 0, 0); //moveable World constructor --> defines center & scale (x, scale, y)???
+  //level2World = new World("sky", level2Bg);   //simple World construtor
   endScreen = new World("end", endBg);
   currentScreen = splashScreen;
 
   //Level 1 Image Setup - GRID  
   player1 = loadImage(player1File);
   player1.resize(level1Grid.getTileWidthPixels(),level1Grid.getTileHeightPixels());
-  // enemy = loadImage("images/articuno.png");
-  // enemy.resize(100,100);
 
   //Adding pixel-based Animated Sprites to the world
   // level1Grid.addSpriteCopyTo(exampleSprite);
@@ -101,7 +101,11 @@ void setup() {
   System.out.println("Done adding sprites to level 1..");
   
   //LEVEL 2 SPRITE SETUP - WORLD
-  player2 = new Sprite(player2File, 0.5);
+  player2 = new Sprite(player2File, 0.25);
+  //player2.moveTo(player2startX, player2startY);
+  // enemy = loadImage("images/articuno.png");
+  // enemy.resize(100,100);
+
   
   //Other Setup
   exampleAnimationSetup();
@@ -202,7 +206,6 @@ void mouseClicked(){
 
 
 
-
 //------------------ CUSTOM  GAME METHODS --------------------//
 
 //method to update the Title Bar of the Game
@@ -215,14 +218,15 @@ public void updateTitleBar(){
     //adjust the extra text as desired
   
   }
-
 }
 
 //method to update what is drawn on the screen each frame
 public void updateScreen(){
 
   //Update the Background of the current Screen
-  background(currentScreen.getBg());
+  if(currentScreen.getBg() != null){
+    background(currentScreen.getBg());
+  }
 
   //splashScreen update
   if(splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
@@ -242,7 +246,11 @@ public void updateScreen(){
     level1Grid.showImages();
     level1Grid.showGridSprites();
 
-
+    //move to next level based on a button click
+    b1.show();
+    if(b1.isClicked()){
+      currentScreen = level2World;
+    }
     
   }
 
@@ -250,6 +258,9 @@ public void updateScreen(){
   else if(currentScreen == level2World){
     currentWorld = level2World;
     
+    level2World.moveBgXY(-3.0, 0);
+    level2World.show();
+
     player2.show();
 
 
@@ -358,7 +369,7 @@ public void exampleAnimationSetup(){
 //example method that animates the horse Sprites
 public void checkExampleAnimation(){
   if(doAnimation){
-    exampleSprite.animateHorizontal(5.0, 1.0, true);
+    exampleSprite.animateHorizontal(5.0, 10.0, true);
     //System.out.println("animating!");
   }
 }
