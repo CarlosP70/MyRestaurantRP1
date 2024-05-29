@@ -85,7 +85,7 @@ void setup() {
 
   //setup the screens/worlds/grids in the Game
   splashScreen = new Screen("splash", splashBg);
-  level1Grid = new Grid("chessBoard", level1Bg, 6, 8);
+  level1Grid = new Grid("chessBoard", level1Bg, 9, 9);
   level2World = new World("sky", level2BgFile, 8.0, 0, 0); //moveable World constructor --> defines center & scale (x, scale, y)???
   //level2World = new World("sky", level2Bg);   //simple World construtor
   endScreen = new World("end", endBg);
