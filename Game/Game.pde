@@ -1,119 +1,101 @@
 /* Game Class Starter File
  * Authors: Carlos Perez | Justin Avila
- * Last Edit: 5/28/2024
+ * Last Edit: 5/20/2024
  */
 
 //import processing.sound.*;
 
 //------------------ GAME VARIABLES --------------------//
 
-//VARIABLES: Title Bar
+//Title Bar
+private int msElapsed = 0;
 String titleText = "Crazy Chef";
 String extraText = "";
 
-//VARIABLES: Whole Game
-AnimatedSprite runningHorse;
+//Current Screens
+Screen currentScreen;
+World currentWorld;
+Grid currentGrid;
+
+//Splash Screen Variables
+Screen splashScreen;
+String splashBgFile = "images/apcsa.png";
+PImage splashBg;
+
+//Level1 Screen Variables
+Grid mainGrid;
+String mainBgFile = "images/restaurantwallpaper.jpg";
+PImage mainBg;
+
+PImage player1;
+String player1File = "images/Chef_Player.png";
+int player1Row = 3;
+
+int health = 3;
+
+PImage enemy;
+AnimatedSprite enemySprite;
+
+AnimatedSprite exampleSprite;
 boolean doAnimation;
 
-//VARIABLES: Splash Screen
-Screen splashScreen;
-PImage splashBg;
-String splashBgFile = "images/apcsa.png";
-//SoundFile song;
-
-//VARIABLES: Level1Grid Screen
-Grid level1Grid;
-PImage level1Bg;
-String level1BgFile = "images/Background_V1.png";
-
-PImage player1;   //Use PImage to display the image in a GridLocation
-String player1File = "images/Chef_Player_2.gif";
-int player1Row = 3;
-int player1Col = 0;
-int health = 3;
-AnimatedSprite walkingChick;
-Button b1 = new Button("rect", 650, 525, 100, 50, "GoToLevel2");
-
-//VARIABLES: Level2World Pixel-based Screen
-World level2World;
-PImage level2Bg;
-String level2BgFile = "images/sky.jpg";
-Sprite player2; //Use Sprite for a pixel-based Location
-String player2File = "images/zapdos.png";
-int player2startX = 50;
-int player2startY = 300;
-
-//VARIABLES: EndScreen
+//EndScreen variables
 World endScreen;
 PImage endBg;
 String endBgFile = "images/youwin.png";
 
-
-//VARIABLES: Tracking the current Screen being displayed
-Screen currentScreen;
-World currentWorld;
-Grid currentGrid;
-private int msElapsed = 0;
-
+//Example Variables
+//HexGrid hGrid = new HexGrid(3);
+//SoundFile song;
 
 //------------------ REQUIRED PROCESSING METHODS --------------------//
 
 //Required Processing method that gets run once
 void setup() {
 
-  //SETUP: Match the screen size to the background image size
-  size(800,600);  //these will automatically be saved as width & height
-  imageMode(CORNER);    //Set Images to read coordinates at corners
-  //fullScreen();   //only use if not using a specfic bg image
+  //Match the screen size to the background image size
+  size(800,600);
   
-  //SETUP: Set the title on the title bar
+  //Set the title on the title bar
   surface.setTitle(titleText);
 
-  //SETUP: Load BG images used in all screens
+  //Load BG images used
   splashBg = loadImage(splashBgFile);
-  splashBg.resize(width, height);
-  level1Bg = loadImage(level1BgFile);
-  level1Bg.resize(width, height);
-  level2Bg = loadImage(level2BgFile);
-  level2Bg.resize(width, height);
+  splashBg.resize(800,600);
+  mainBg = loadImage(mainBgFile);
+  mainBg.resize(800,600);
   endBg = loadImage(endBgFile);
-  endBg.resize(width, height);  
+  endBg.resize(800,600);
 
-  //SETUP: Screens, Worlds, Grids
+  //setup the screens/worlds/grids in the Game
   splashScreen = new Screen("splash", splashBg);
-  level1Grid = new Grid("chessBoard", level1Bg, 9, 9);
-  //level1Grid.startPrintingGridMarks();
-  level2World = new World("sky", level2BgFile, 8.0, 0, 0); //moveable World constructor --> defines center & scale (x, scale, y)???
-  //level2World = new World("sky", level2Bg);   //non-moving World construtor
+  mainGrid = new Grid("chessBoard", mainBg, 6, 8);
   endScreen = new World("end", endBg);
   currentScreen = splashScreen;
 
-  //SETUP: All Game objects
-  runningHorse = new AnimatedSprite("sprites/horse_run.png", "sprites/horse_run.json", 50.0, 75.0, 10.0);
-
-  //SETUP: Level 1
+  //setup the sprites  
   player1 = loadImage(player1File);
-  player1.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
-  walkingChick = new AnimatedSprite("sprites/chick_walk.png", "sprites/chick_walk.json", 0.0, 0.0, 5.0);
-  level1Grid.setTileSprite(new GridLocation (5,5), walkingChick);
-  System.out.println("Done loading Level 1 ...");
+  player1.resize(mainGrid.getTileWidthPixels(),mainGrid.getTileHeightPixels());
+  // enemy = loadImage("images/articuno.png");
+  // enemy.resize(100,100);
+  exampleAnimationSetup();
+
+  //Adding pixel-based Sprites to the world
+  // mainGrid.addSpriteCopyTo(exampleSprite);
+  mainGrid.printSprites();
+  System.out.println("Done adding sprites to main world..");
+
   
-  //SETUP: Level 2
-  player2 = new Sprite(player2File, 0.25);
-  //player2.moveTo(player2startX, player2startY);
-  level2World.addSpriteCopyTo(runningHorse, 100, 200);  //example Sprite added to a World at a location, with a speed
-  level2World.printWorldSprites();
-  System.out.println("Done loading Level 2 ...");
-  
-  //SETUP: Sound
+  //Other Setup
   // Load a soundfile from the /data folder of the sketch and play it back
   // song = new SoundFile(this, "sounds/Lenny_Kravitz_Fly_Away.mp3");
   // song.play();
   
+  imageMode(CORNER);    //Set Images to read coordinates at corners
+  //fullScreen();   //only use if not using a specfic bg image
   println("Game started...");
 
-} //end setup()
-
+}
 
 //Required Processing method that automatically loops
 //(Anything drawn on the screen should be called from here)
@@ -142,36 +124,21 @@ void draw() {
 void keyPressed(){
 
   //check what key was pressed
-  System.out.println("\nKey pressed: " + keyCode); //key gives you a character for the key pressed
+  System.out.println("Key pressed: " + key); //keyCode gives you an integer for the key
 
   //What to do when a key is pressed?
   
-  //KEYS FOR LEVEL1
-  if(currentScreen == level1Grid){
+  //set [W] key to move the player1 up & avoid Out-of-Bounds errors
+  if(keyCode == 87){
+   
+    //Store old GridLocation
+    GridLocation oldLoc = new GridLocation(player1Row, 0);
 
-    //set [W] key to move the player1 up & avoid Out-of-Bounds errors
-    if(keyCode == 87){
+    //Erase image from previous location
     
-      //Store old GridLocation
-      GridLocation oldLoc = new GridLocation(player1Row, player1Col);
-      
-      //Erase image from previous location
-      
 
-      //change the field for player1Row
-      player1Row--;
-    }
-
-
-
-  }
-
-  //CHANGING SCREENS BASED ON KEYS
-  //change to level1 if 1 key pressed, level2 if 2 key is pressed
-  if(key == '1'){
-    currentScreen = level1Grid;
-  } else if(key == '2'){
-    currentScreen = level2World;
+    //change the field for player1Row
+    player1Row--;
   }
 
 
@@ -181,7 +148,7 @@ void keyPressed(){
 void mouseClicked(){
   
   //check if click was successful
-  System.out.println("\nMouse was clicked at (" + mouseX + "," + mouseY + ")");
+  System.out.println("Mouse was clicked at (" + mouseX + "," + mouseY + ")");
   if(currentGrid != null){
     System.out.println("Grid location: " + currentGrid.getGridLocation());
   }
@@ -201,6 +168,7 @@ void mouseClicked(){
 
 
 
+
 //------------------ CUSTOM  GAME METHODS --------------------//
 
 //method to update the Title Bar of the Game
@@ -213,69 +181,38 @@ public void updateTitleBar(){
     //adjust the extra text as desired
   
   }
+
 }
 
 //method to update what is drawn on the screen each frame
 public void updateScreen(){
 
-  //UPDATE: Background of the current Screen
-  if(currentScreen.getBg() != null){
-    background(currentScreen.getBg());
+  //Update the Background
+  background(currentScreen.getBg());
+
+  //splashScreen update
+  if(splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
+    currentScreen = mainGrid;
   }
 
-  //UPDATE: splashScreen
-  if(currentScreen == splashScreen && splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
-    System.out.print("s");
-    currentScreen = level1Grid;
-  }
-
-  //UPDATE: level1Grid Screen
-  if(currentScreen == level1Grid){
-    System.out.print("1");
-    currentGrid = level1Grid;
+  //skyGrid Screen Updates
+  if(currentScreen == mainGrid){
+    currentGrid = mainGrid;
 
     //Display the Player1 image
     GridLocation player1Loc = new GridLocation(player1Row,0);
-    level1Grid.setTileImage(player1Loc, player1);
-    
+    mainGrid.setTileImage(player1Loc, player1);
+      
     //update other screen elements
-    level1Grid.showGridImages();
-    level1Grid.showGridSprites();
-    level1Grid.showWorldSprites();
+    mainGrid.showSprites();
+    mainGrid.showImages();
+    mainGrid.showGridSprites();
 
-    //move to next level based on a button click
-    b1.show();
-    if(b1.isClicked()){
-      System.out.println("\nButton Clicked");
-      currentScreen = level2World;
-    }
-  
-  }
-  
-  //UPDATE: level2World Scren
-  if(currentScreen == level2World){
-    System.out.print("2");
-    currentWorld = level2World;
-    currentGrid = null;
+    checkExampleAnimation();
     
-    level2World.moveBgXY(-3.0, 0);
-    level2World.show();
-
-    player2.show();
-
-    level2World.showWorldSprites();
-
   }
 
-  //UPDATE: End Screen
-  // if(currentScreen == endScreen){
-
-  // }
-
-  //UPDATE: Any Screen
-  if(doAnimation){
-    runningHorse.animateHorizontal(5.0, 10.0, true);
-  }
+  //Other screens?
 
 
 }
@@ -284,15 +221,20 @@ public void updateScreen(){
 public void populateSprites(){
 
   //What is the index for the last column?
-  
-
+int lastCol = level1Grid.getNumCols() - 1;
   //Loop through all the rows in the last column
-
+  for (int t = 0; r < level1Grid.getNumRows(); r++)
+  {
+    GridLocation loc = new GridLocation(r, lastCol);
     //Generate a random number
-
-
+    double random = Math.random();
     //10% of the time, decide to add an enemy image to a Tile
-    
+   if (random < 0.1)
+   {
+   level1Grid.setTileImage(loc, customer);
+   System.out.println("Adding customer to " + loc);
+   }
+  }
 
 }
 
@@ -300,7 +242,32 @@ public void populateSprites(){
 public void moveSprites(){
 
 //Loop through all of the rows & cols in the grid
+for (int r = 0; r < level1grid.getNumRows(); r++){
+  for (int c = 0; c < level1Grid.getNumCols(); c++){
+    GridLocation loc = new GridLocation(r,c);
+  
 
+    //check for customer at location
+    if(level1Grid.getTileImage(loc) == customer){
+
+    
+    //eraser customer from current location
+    level1Grid.clearTileSprite(loc);
+    //only move if it is a legal col
+    if (c >= 1){
+     GridLocation leftLoc = new GridLocation(r, c-1);
+     level1Grid.setTileImage(leftLoc, customer);
+     //System.out.println("moving customer"); 
+    }
+
+
+    //add customer to left side
+    }
+}
+}
+    }
+  }
+}
       //Store the current GridLocation
 
       //Store the next GridLocation
@@ -365,4 +332,19 @@ public void endGame(){
     //Show any end imagery
     currentScreen = endScreen;
 
+}
+
+//example method that creates 1 horse run along the screen
+public void exampleAnimationSetup(){  
+  int i = 2;
+  exampleSprite = new AnimatedSprite("sprites/horse_run.png", "sprites/horse_run.json", 50.0, i*75.0);
+  //exampleSprite.resize(200,200);
+}
+
+//example method that animates the horse Sprites
+public void checkExampleAnimation(){
+  if(doAnimation){
+    exampleSprite.animateHorizontal(5.0, 1.0, true);
+    //System.out.println("animating!");
+  }
 }
