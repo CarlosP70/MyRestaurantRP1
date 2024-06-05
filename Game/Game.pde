@@ -139,21 +139,24 @@ void keyPressed(){
     GridLocation oldLoc = new GridLocation(chefRow, chefCol);
 
     //Erase image from previous location
-    
+    level1Grid.clearTileImage(oldLoc);
 
     //change the field for chefRow
     chefRow--;
   }
   if(keyCode == 65){
       GridLocation oldLoc = new GridLocation(chefRow, chefCol);
+      level1Grid.clearTileImage(oldLoc);
       chefCol--;
     }
     if(keyCode == 83){
       GridLocation oldLoc = new GridLocation(chefRow, chefCol);
+      level1Grid.clearTileImage(oldLoc);
       chefRow++;
     }
     if(keyCode == 68){
       GridLocation oldLoc = new GridLocation(chefRow, chefCol);
+      level1Grid.clearTileImage(oldLoc);
       chefCol++;
     }
 
@@ -323,7 +326,7 @@ public boolean checkCollision(GridLocation loc, GridLocation nextLoc){
 
   //check if enemy runs into player
 
-    //clear out the enemy if it hits the player (using cleartTileImage() or clearTileSprite() from Grid class)
+    //clear out the enemy if it hits the player (using clearTileImage() or clearTileSprite() from Grid class)
 
     //Update status variable
 
