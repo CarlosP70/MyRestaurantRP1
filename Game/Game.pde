@@ -23,15 +23,17 @@ String splashBgFile = "images/apcsa.png";
 PImage splashBg;
 
 //Level1 Screen Variables
-Grid mainGrid;
+Grid level1Grid;
 String mainBgFile = "images/restaurantwallpaper.jpg";
 PImage mainBg;
 
-PImage player1;
-String player1File = "images/Chef_Player.png";
-int player1Row = 3;
-
+PImage chef;
+String chefFile = "images/Chef_Player.png";
+int chefRow = 7;
+int chefCol = 1;
 int health = 3;
+PImage customer;
+String customerFile = "images/Chef_Player.png";
 
 PImage enemy;
 AnimatedSprite enemySprite;
@@ -54,35 +56,37 @@ String endBgFile = "images/youwin.png";
 void setup() {
 
   //Match the screen size to the background image size
-  size(800,600);
+  size(800,1000);
   
   //Set the title on the title bar
   surface.setTitle(titleText);
 
   //Load BG images used
   splashBg = loadImage(splashBgFile);
-  splashBg.resize(800,600);
+  splashBg.resize(width, height);
   mainBg = loadImage(mainBgFile);
-  mainBg.resize(800,600);
+  mainBg.resize(width, height);
   endBg = loadImage(endBgFile);
-  endBg.resize(800,600);
+  endBg.resize(width, height);
 
   //setup the screens/worlds/grids in the Game
   splashScreen = new Screen("splash", splashBg);
-  mainGrid = new Grid("chessBoard", mainBg, 6, 8);
+  level1Grid = new Grid("chessBoard", mainBg, 10, 8);
   endScreen = new World("end", endBg);
   currentScreen = splashScreen;
 
   //setup the sprites  
-  player1 = loadImage(player1File);
-  player1.resize(mainGrid.getTileWidthPixels(),mainGrid.getTileHeightPixels());
+  chef = loadImage(chefFile);
+  chef.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
+    customer = loadImage(customerFile);
+  customer.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
   // enemy = loadImage("images/articuno.png");
   // enemy.resize(100,100);
   exampleAnimationSetup();
 
   //Adding pixel-based Sprites to the world
-  // mainGrid.addSpriteCopyTo(exampleSprite);
-  mainGrid.printSprites();
+  // level1Grid.addSpriteCopyTo(exampleSprite);
+  level1Grid.printSprites();
   System.out.println("Done adding sprites to main world..");
 
   
@@ -108,7 +112,7 @@ void draw() {
   if (msElapsed % 300 == 0) {
     //sprite handling
     populateSprites();
-    moveSprites();
+    moveCustomers();
   }
   msElapsed +=100;
   currentScreen.pause(100);
@@ -128,18 +132,30 @@ void keyPressed(){
 
   //What to do when a key is pressed?
   
-  //set [W] key to move the player1 up & avoid Out-of-Bounds errors
+  //set [W] key to move the chef up & avoid Out-of-Bounds errors
   if(keyCode == 87){
    
     //Store old GridLocation
-    GridLocation oldLoc = new GridLocation(player1Row, 0);
+    GridLocation oldLoc = new GridLocation(chefRow, chefCol);
 
     //Erase image from previous location
     
 
-    //change the field for player1Row
-    player1Row--;
+    //change the field for chefRow
+    chefRow--;
   }
+  if(keyCode == 65){
+      GridLocation oldLoc = new GridLocation(chefRow, chefCol);
+      chefCol--;
+    }
+    if(keyCode == 83){
+      GridLocation oldLoc = new GridLocation(chefRow, chefCol);
+      chefRow++;
+    }
+    if(keyCode == 68){
+      GridLocation oldLoc = new GridLocation(chefRow, chefCol);
+      chefCol++;
+    }
 
 
 }
@@ -153,7 +169,7 @@ void mouseClicked(){
     System.out.println("Grid location: " + currentGrid.getGridLocation());
   }
 
-  //what to do if clicked? (Make player1 jump back?)
+  //what to do if clicked? (Make chef jump back?)
   
 
 
@@ -192,21 +208,21 @@ public void updateScreen(){
 
   //splashScreen update
   if(splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
-    currentScreen = mainGrid;
+    currentScreen = level1Grid;
   }
 
   //skyGrid Screen Updates
-  if(currentScreen == mainGrid){
-    currentGrid = mainGrid;
+  if(currentScreen == level1Grid){
+    currentGrid = level1Grid;
 
-    //Display the Player1 image
-    GridLocation player1Loc = new GridLocation(player1Row,0);
-    mainGrid.setTileImage(player1Loc, player1);
+    //Display the chef image
+    GridLocation chefLoc = new GridLocation(chefRow,chefCol);
+    level1Grid.setTileImage(chefLoc, chef);
       
     //update other screen elements
-    mainGrid.showSprites();
-    mainGrid.showImages();
-    mainGrid.showGridSprites();
+    level1Grid.showSprites();
+    level1Grid.showImages();
+    level1Grid.showGridSprites();
 
     checkExampleAnimation();
     
@@ -221,64 +237,63 @@ public void updateScreen(){
 public void populateSprites(){
 
   //What is the index for the last column?
-int lastCol = level1Grid.getNumCols() - 1;
+int topRow = 0;
+
   //Loop through all the rows in the last column
-  for (int t = 0; r < level1Grid.getNumRows(); r++)
+  for (int c = 2; c <= 5; c++)
   {
-    GridLocation loc = new GridLocation(r, lastCol);
+    GridLocation loc = new GridLocation(topRow, c);
     //Generate a random number
     double random = Math.random();
     //10% of the time, decide to add an enemy image to a Tile
    if (random < 0.1)
    {
-   level1Grid.setTileImage(loc, customer);
-   System.out.println("Adding customer to " + loc);
+    level1Grid.setTileImage(loc, customer);
+    System.out.println("Adding customer to " + loc);
    }
   }
 
 }
 
 //Method to move around the enemies/sprites on the screen
-public void moveSprites(){
+public void moveCustomers(){
 
 //Loop through all of the rows & cols in the grid
-for (int r = 0; r < level1grid.getNumRows(); r++){
-  for (int c = 0; c < level1Grid.getNumCols(); c++){
+for (int r = 0; r < 4; r++){
+  for (int c = 2; c <= 5; c++){
     GridLocation loc = new GridLocation(r,c);
   
-
     //check for customer at location
     if(level1Grid.getTileImage(loc) == customer){
 
-    
-    //eraser customer from current location
-    level1Grid.clearTileSprite(loc);
-    //only move if it is a legal col
-    if (c >= 1){
-     GridLocation leftLoc = new GridLocation(r, c-1);
-     level1Grid.setTileImage(leftLoc, customer);
-     //System.out.println("moving customer"); 
-    }
+      //check if you SHOULD move the customer forward in line (no cust or counter in front)
+      if(true){
+        //eraser customer from current location
+        level1Grid.clearTileSprite(loc);
+
+        GridLocation newLoc = new GridLocation(r+1, c);
+
+        level1Grid.setTileImage(newLoc, customer);
+          //System.out.println("moving customer"); 
+      }
+
+    } 
+
+  } //inner for loop
+} //outer for loop
 
 
-    //add customer to left side
-    }
-}
-}
-    }
-  }
-}
       //Store the current GridLocation
 
       //Store the next GridLocation
 
-      //Check if the current tile has an image that is not player1      
+      //Check if the current tile has an image that is not chef      
 
 
         //Get image/sprite from current location
           
 
-        //CASE 1: Collision with player1
+        //CASE 1: Collision with chef
 
 
         //CASE 2: Move enemy over to new location
