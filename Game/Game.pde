@@ -7,25 +7,19 @@
 
 //------------------ GAME VARIABLES --------------------//
 
-//Title Bar
-private int msElapsed = 0;
+//VARIABLES: Title Bar
 String titleText = "Crazy Chef";
 String extraText = "";
 
-//Current Screens
-Screen currentScreen;
-World currentWorld;
-Grid currentGrid;
-
-//Splash Screen Variables
+//VARIABLES: Splash Screen
 Screen splashScreen;
 String splashBgFile = "images/apcsa.png";
 PImage splashBg;
 
-//Level1 Screen Variables
+//VARIABLES: Level1Grid Screen
 Grid level1Grid;
-String mainBgFile = "images/restaurantwallpaper.jpg";
-PImage mainBg;
+String level1BgFile = "images/restaurantwallpaper.jpg";
+PImage level1Bg;
 
 PImage chef;
 String chefFile = "images/Chef_Player.png";
@@ -35,19 +29,17 @@ int health = 3;
 PImage customer;
 String customerFile = "images/Chef_Player.png";
 
-PImage enemy;
-AnimatedSprite enemySprite;
-
-AnimatedSprite exampleSprite;
-boolean doAnimation;
-
 //EndScreen variables
 World endScreen;
 PImage endBg;
 String endBgFile = "images/youwin.png";
 
-//Example Variables
-//HexGrid hGrid = new HexGrid(3);
+
+//VARIABLES: Tracking the current Screen being displayed
+Screen currentScreen;
+World currentWorld;
+Grid currentGrid;
+private int msElapsed = 0;
 //SoundFile song;
 
 //------------------ REQUIRED PROCESSING METHODS --------------------//
@@ -55,42 +47,37 @@ String endBgFile = "images/youwin.png";
 //Required Processing method that gets run once
 void setup() {
 
-  //Match the screen size to the background image size
+  //SETUP: Match the screen size to the background image size
   size(800,1000);
   
-  //Set the title on the title bar
+  //SETUP: Set the title on the title bar
   surface.setTitle(titleText);
 
-  //Load BG images used
+  //SETUP: Load BG images used in all screens
   splashBg = loadImage(splashBgFile);
   splashBg.resize(width, height);
-  mainBg = loadImage(mainBgFile);
-  mainBg.resize(width, height);
+  level1Bg = loadImage(level1BgFile);
+  level1Bg.resize(width, height);
   endBg = loadImage(endBgFile);
   endBg.resize(width, height);
 
-  //setup the screens/worlds/grids in the Game
+  //SETUP: Screens, Worlds, Grids
   splashScreen = new Screen("splash", splashBg);
-  level1Grid = new Grid("chessBoard", mainBg, 10, 8);
+  level1Grid = new Grid("chessBoard", level1Bg, 10, 8);
   endScreen = new World("end", endBg);
   currentScreen = splashScreen;
 
-  //setup the sprites  
+
+  //SETUP: Level 1
   chef = loadImage(chefFile);
   chef.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
-    customer = loadImage(customerFile);
+  customer = loadImage(customerFile);
   customer.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
-  // enemy = loadImage("images/articuno.png");
-  // enemy.resize(100,100);
-  exampleAnimationSetup();
 
-  //Adding pixel-based Sprites to the world
-  // level1Grid.addSpriteCopyTo(exampleSprite);
-  level1Grid.printSprites();
   System.out.println("Done adding sprites to main world..");
 
   
-  //Other Setup
+  //SETUP: Sound
   // Load a soundfile from the /data folder of the sketch and play it back
   // song = new SoundFile(this, "sounds/Lenny_Kravitz_Fly_Away.mp3");
   // song.play();
@@ -144,21 +131,32 @@ void keyPressed(){
     //change the field for chefRow
     chefRow--;
   }
-  if(keyCode == 65){
-      GridLocation oldLoc = new GridLocation(chefRow, chefCol);
-      level1Grid.clearTileImage(oldLoc);
-      chefCol--;
-    }
-    if(keyCode == 83){
-      GridLocation oldLoc = new GridLocation(chefRow, chefCol);
-      level1Grid.clearTileImage(oldLoc);
-      chefRow++;
-    }
-    if(keyCode == 68){
-      GridLocation oldLoc = new GridLocation(chefRow, chefCol);
-      level1Grid.clearTileImage(oldLoc);
-      chefCol++;
-    }
+  else if(keyCode == 65){
+    GridLocation oldLoc = new GridLocation(chefRow, chefCol);
+    level1Grid.clearTileImage(oldLoc);
+    chefCol--;
+  }
+  else if(keyCode == 83){
+    GridLocation oldLoc = new GridLocation(chefRow, chefCol);
+    level1Grid.clearTileImage(oldLoc);
+    chefRow++;
+  }
+  else if(keyCode == 68){
+    GridLocation oldLoc = new GridLocation(chefRow, chefCol);
+    level1Grid.clearTileImage(oldLoc);
+    chefCol++;
+  }
+
+  //CHANGING SCREENS BASED ON KEYS
+  //change to level1 if 1 key pressed, level2 if 2 key is pressed
+  if(key == '0'){
+    currentScreen = splashScreen;
+  } else if(key == '1'){
+    currentScreen = level1Grid;
+  } else if(key == '2'){
+    currentScreen = endScreen;
+  }
+
 
 
 }
@@ -167,7 +165,7 @@ void keyPressed(){
 void mouseClicked(){
   
   //check if click was successful
-  System.out.println("Mouse was clicked at (" + mouseX + "," + mouseY + ")");
+  System.out.println("\nMouse was clicked at (" + mouseX + "," + mouseY + ")");
   if(currentGrid != null){
     System.out.println("Grid location: " + currentGrid.getGridLocation());
   }
@@ -177,8 +175,7 @@ void mouseClicked(){
 
 
   //Toggle the animation on & off
-  doAnimation = !doAnimation;
-  System.out.println("doAnimation: " + doAnimation);
+
   if(currentGrid != null){
     currentGrid.setMark("X",currentGrid.getGridLocation());
   }
@@ -206,16 +203,23 @@ public void updateTitleBar(){
 //method to update what is drawn on the screen each frame
 public void updateScreen(){
 
-  //Update the Background
-  background(currentScreen.getBg());
-
-  //splashScreen update
-  if(splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
-    currentScreen = level1Grid;
+  //UPDATE: Background of the current Screen
+  if(currentScreen.getBg() != null){
+    background(currentScreen.getBg());
   }
 
-  //skyGrid Screen Updates
+  //UPDATE: splashScreen
+  if(currentScreen == splashScreen){
+    System.out.print("s");
+    
+    if(splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
+    currentScreen = level1Grid;
+    }
+  }
+
+  //UPDATE: level1Grid Screen
   if(currentScreen == level1Grid){
+    System.out.print("1");
     currentGrid = level1Grid;
 
     //Display the chef image
@@ -226,15 +230,15 @@ public void updateScreen(){
     level1Grid.showSprites();
     level1Grid.showImages();
     level1Grid.showGridSprites();
-
-    checkExampleAnimation();
     
   }
 
-  //Other screens?
+  //UPDATE: End Screen
+  // if(currentScreen == endScreen){
 
+  // }
 
-}
+} //end updateScreen()
 
 //Method to populate enemies or other sprites on the screen
 public void populateSprites(){
@@ -352,17 +356,3 @@ public void endGame(){
 
 }
 
-//example method that creates 1 horse run along the screen
-public void exampleAnimationSetup(){  
-  int i = 2;
-  exampleSprite = new AnimatedSprite("sprites/horse_run.png", "sprites/horse_run.json", 50.0, i*75.0);
-  //exampleSprite.resize(200,200);
-}
-
-//example method that animates the horse Sprites
-public void checkExampleAnimation(){
-  if(doAnimation){
-    exampleSprite.animateHorizontal(5.0, 1.0, true);
-    //System.out.println("animating!");
-  }
-}
