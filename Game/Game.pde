@@ -120,7 +120,7 @@ void keyPressed(){
   //What to do when a key is pressed?
   
   //set [W] key to move the chef up & avoid Out-of-Bounds errors
-  if(keyCode == 87){
+  if(keyCode == 87 && chefRow > 6){
    
     //Store old GridLocation
     GridLocation oldLoc = new GridLocation(chefRow, chefCol);
@@ -131,17 +131,17 @@ void keyPressed(){
     //change the field for chefRow
     chefRow--;
   }
-  else if(keyCode == 65){
+  else if(keyCode == 65 && chefCol > 0){
     GridLocation oldLoc = new GridLocation(chefRow, chefCol);
     level1Grid.clearTileImage(oldLoc);
     chefCol--;
   }
-  else if(keyCode == 83){
+  else if(keyCode == 83 && chefRow < 8){
     GridLocation oldLoc = new GridLocation(chefRow, chefCol);
     level1Grid.clearTileImage(oldLoc);
     chefRow++;
   }
-  else if(keyCode == 68){
+  else if(keyCode == 68 && chefCol < 7){
     GridLocation oldLoc = new GridLocation(chefRow, chefCol);
     level1Grid.clearTileImage(oldLoc);
     chefCol++;
