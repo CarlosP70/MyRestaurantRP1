@@ -209,39 +209,9 @@ void keyPressed(){
     //System.out.println(heldItem);
   }
 
-  //deliver method
-  else if (keyCode == 88 && chefRow == 6 && chefCol == 2)
-  {
-  heldItem = "Holding: Nothing";
-  extraText = heldItem;
-  //System.out.println(heldItem);
-  customer.clearTileImage(loc);
-  }
+  deliver();
 
-  else if (keyCode == 88 && chefRow == 6 && chefCol == 3)
-  {
-  heldItem = "Holding: Nothing";
-  extraText = heldItem;
-  //System.out.println(heldItem);
-  customer.clearTileImage(loc);
-  }
-
-  else if (keyCode == 88 && chefRow == 6 && chefCol == 4)
-  {
-  heldItem = "Holding: Nothing";
-  extraText = heldItem;
-  //System.out.println(heldItem);
-  customer.clearTileImage(loc);
-  }
-
-  else if (keyCode == 88 && chefRow == 6 && chefCol == 5)
-  {
-  heldItem = "Holding: Nothing";  
-  extraText = heldItem;
-  //System.out.println(heldItem);
-  customer.clearTileImage(loc);
-  }
-
+  
   //CHANGING SCREENS BASED ON KEYS
   //change to level1 if 1 key pressed, level2 if 2 key is pressed
   if(key == '0'){
@@ -275,6 +245,48 @@ void mouseClicked(){
     currentGrid.setMark("X",currentGrid.getGridLocation());
   }
 
+}
+
+//deliver method
+public void deliver(){
+
+  if (keyCode == 88){
+
+    //Check if in front of any lines
+    if(chefRow == 6 && (chefCol == 2 || chefCol == 3  || chefCol == 4 || chefCol == 5))
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    }
+
+    // else if (keyCode == 88 && chefRow == 6 && chefCol == 3)
+    // {
+    // heldItem = "Holding: Nothing";
+    // extraText = heldItem;
+    // //System.out.println(heldItem);
+    // customer.clearTileImage(loc);
+    // }
+
+    // else if (keyCode == 88 && chefRow == 6 && chefCol == 4)
+    // {
+    // heldItem = "Holding: Nothing";
+    // extraText = heldItem;
+    // //System.out.println(heldItem);
+    // customer.clearTileImage(loc);
+    // }
+
+    // else if (keyCode == 88 && chefRow == 6 && chefCol == 5)
+    // {
+    // heldItem = "Holding: Nothing";  
+    // extraText = heldItem;
+    // //System.out.println(heldItem);
+    // customer.clearTileImage(loc);
+    // }
+
+
+  }
+  
 }
 
 
