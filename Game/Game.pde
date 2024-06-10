@@ -11,6 +11,7 @@
 private int msElapsed = 0;
 String titleText = "Crazy Chef";
 String extraText = "";
+String heldItem = "";
 
 //Current Screens
 Screen currentScreen;
@@ -40,6 +41,28 @@ AnimatedSprite enemySprite;
 
 AnimatedSprite exampleSprite;
 boolean doAnimation;
+
+PImage counter;
+String counterFile = "images/counter.jpg";
+
+PImage backCounter;
+String backCounterFile = "images/counter.jpg";
+
+PImage burger;
+String burgerFile = "images/Burger.png";
+int burgerRow = 8;
+int burgerCol = 2;
+
+PImage fries;
+String friesFile = "images/Fries.png";
+int friesRow = 8;
+int friesCol = 3;
+
+PImage cola;
+String colaFile = "images/Cola.png";
+int colaRow = 8;
+int colaCol = 4;
+
 
 //EndScreen variables
 World endScreen;
@@ -221,6 +244,26 @@ public void updateScreen(){
     //Display the chef image
     GridLocation chefLoc = new GridLocation(chefRow,chefCol);
     level1Grid.setTileImage(chefLoc, chef);
+
+    //Display the burger image
+    GridLocation burgerLoc = new GridLocation(burgerRow, burgerCol);
+    level1Grid.setTileImage(burgerLoc, burger);
+
+    
+    //Display the fries image
+    GridLocation friesLoc = new GridLocation(friesRow, friesCol);
+    level1Grid.setTileImage(friesLoc, fries);
+
+    //Display the cola image
+    GridLocation colaLoc = new GridLocation(colaRow,colaCol);
+    level1Grid.setTileImage(colaLoc, cola);
+    
+    //Display the counter image
+
+
+   //Display the back counter image
+
+
       
     //update other screen elements
     level1Grid.showSprites();
@@ -232,8 +275,6 @@ public void updateScreen(){
   }
 
   //Other screens?
-
-
 }
 
 //Method to populate enemies or other sprites on the screen
@@ -366,3 +407,4 @@ public void checkExampleAnimation(){
     //System.out.println("animating!");
   }
 }
+
