@@ -26,7 +26,7 @@ PImage chef;
 String chefFile = "images/Chef_Player_2.gif";
 int chefRow = 7;
 int chefCol = 1;
-int health = 3;
+int health = 1;
 
 PImage customer;
 String customerFile = "images/Customer_1.png";
@@ -183,6 +183,21 @@ void keyPressed(){
     GridLocation oldLoc = new GridLocation(chefRow, chefCol);
     level1Grid.clearTileImage(oldLoc);
     chefCol++;
+  }
+  else if(keyCode == 69 && chefRow == 8 && chefCol == 1){
+    heldItem = "Holding: Burger";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+  }
+  else if(keyCode == 69 && chefRow == 8 && chefCol == 3){
+    heldItem = "Holding: Fries";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+  }
+  else if(keyCode == 69 && chefRow == 8 && chefCol == 5){
+    heldItem = "Holding: Cola";
+    extraText = heldItem;
+    //System.out.println(heldItem);
   }
 
   //CHANGING SCREENS BASED ON KEYS
