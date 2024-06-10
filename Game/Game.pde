@@ -224,6 +224,7 @@ void keyPressed(){
   heldItem = "Holding: Nothing";
   extraText = heldItem;
   //System.out.println(heldItem);
+  customer.clearTileImage(loc);
   }
 
   else if (keyCode == 88 && chefRow == 6 && chefCol == 3)
@@ -231,6 +232,7 @@ void keyPressed(){
   heldItem = "Holding: Nothing";
   extraText = heldItem;
   //System.out.println(heldItem);
+  customer.clearTileImage(loc);
   }
 
   else if (keyCode == 88 && chefRow == 6 && chefCol == 4)
@@ -238,6 +240,7 @@ void keyPressed(){
   heldItem = "Holding: Nothing";
   extraText = heldItem;
   //System.out.println(heldItem);
+  customer.clearTileImage(loc);
   }
 
   else if (keyCode == 88 && chefRow == 6 && chefCol == 5)
@@ -245,6 +248,7 @@ void keyPressed(){
   heldItem = "Holding: Nothing";  
   extraText = heldItem;
   //System.out.println(heldItem);
+  customer.clearTileImage(loc);
   }
 
   //CHANGING SCREENS BASED ON KEYS
@@ -379,8 +383,15 @@ int topRow = 0;
     System.out.println("Adding customer to " + loc);
    }
   }
+  
 
 }
+
+
+
+
+
+
 
 //Method to move around the enemies/sprites on the screen
 public void moveCustomers(){
