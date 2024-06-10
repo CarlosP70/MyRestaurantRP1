@@ -18,7 +18,7 @@ PImage splashBg;
 
 //VARIABLES: Level1Grid Screen
 Grid level1Grid;
-String level1BgFile = "images/restaurantwallpaper.jpg";
+String level1BgFile = "images/wooden_plank-transformed.jpeg";
 PImage level1Bg;
 
 PImage chef;
@@ -29,6 +29,12 @@ int health = 3;
 
 PImage customer;
 String customerFile = "images/Customer_1.png";
+
+PImage kCounter;
+String kCounterFile = "images/kitchen_counter.jpg";
+int kCounterRow = 9;
+int kCounterCol = 0;
+GridLocation kCounterLoc = new GridLocation(kCounterRow, kCounterCol);
 
 PImage burger;
 String burgerFile = "images/Burger.png";
@@ -92,6 +98,9 @@ void setup() {
   chef.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
   customer = loadImage(customerFile);
   customer.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
+  kCounter = loadImage(kCounterFile);
+  kCounter.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
+  level1Grid.setTileImage(kCounterLoc, kCounter);
   burger = loadImage(burgerFile);
   burger.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
   level1Grid.setTileImage(burgerLoc, burger);
