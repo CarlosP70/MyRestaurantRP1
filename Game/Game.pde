@@ -22,12 +22,31 @@ String level1BgFile = "images/restaurantwallpaper.jpg";
 PImage level1Bg;
 
 PImage chef;
-String chefFile = "images/Chef_Player.png";
+String chefFile = "images/Chef_Player_2.gif";
 int chefRow = 7;
 int chefCol = 1;
 int health = 3;
+
 PImage customer;
-String customerFile = "images/Chef_Player.png";
+String customerFile = "images/Customer_1.png";
+
+PImage burger;
+String burgerFile = "images/Burger.png";
+int burgerRow = 9;
+int burgerCol = 1;
+GridLocation burgerLoc = new GridLocation(burgerRow, burgerCol);
+
+PImage fries;
+String friesFile = "images/Fries.png";
+int friesRow = 9;
+int friesCol = 3;
+GridLocation friesLoc = new GridLocation(friesRow, friesCol);
+
+PImage cola;
+String colaFile = "images/Cola.png";
+int colaRow = 9;
+int colaCol = 5;
+GridLocation colaLoc = new GridLocation(colaRow, colaCol);
 
 //EndScreen variables
 World endScreen;
@@ -73,6 +92,15 @@ void setup() {
   chef.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
   customer = loadImage(customerFile);
   customer.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
+  burger = loadImage(burgerFile);
+  burger.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
+  level1Grid.setTileImage(burgerLoc, burger);
+  fries = loadImage(friesFile);
+  fries.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
+  level1Grid.setTileImage(friesLoc, fries);
+  cola = loadImage(colaFile);
+  cola.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
+  level1Grid.setTileImage(colaLoc, cola);
 
   System.out.println("Done adding sprites to main world..");
 
