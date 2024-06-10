@@ -9,7 +9,8 @@
 
 //VARIABLES: Title Bar
 String titleText = "Crazy Chef";
-String extraText = "";
+String heldItem = "Holding: Nothing";
+String extraText = heldItem;
 
 //VARIABLES: Splash Screen
 Screen splashScreen;
