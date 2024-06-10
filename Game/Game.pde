@@ -134,7 +134,7 @@ void draw() {
   updateScreen();
 
   //simple timing handling
-  if (msElapsed % 300 == 0) {
+  if (msElapsed % 1200 == 0) {
     //sprite handling
     populateSprites();
     moveCustomers();
@@ -306,7 +306,7 @@ int topRow = 0;
     //Generate a random number
     double random = Math.random();
     //10% of the time, decide to add an enemy image to a Tile
-   if (random < 0.1)
+   if (random < 0.01)
    {
     level1Grid.setTileImage(loc, customer);
     System.out.println("Adding customer to " + loc);
@@ -329,7 +329,7 @@ for (int r = 0; r < 4; r++){
       //check if you SHOULD move the customer forward in line (no cust or counter in front)
       if(true){
         //eraser customer from current location
-        level1Grid.clearTileSprite(loc);
+        level1Grid.clearTileImage(loc);
 
         GridLocation newLoc = new GridLocation(r+1, c);
 
