@@ -67,6 +67,8 @@ GridLocation line4Loc = new GridLocation(line4Row, line4Col);
 
 
 
+
+
 //EndScreen variables
 World endScreen;
 PImage endBg;
@@ -260,34 +262,12 @@ public void deliver(){
     //System.out.println(heldItem);
     }
 
-    // else if (keyCode == 88 && chefRow == 6 && chefCol == 3)
-    // {
-    // heldItem = "Holding: Nothing";
-    // extraText = heldItem;
-    // //System.out.println(heldItem);
-    // customer.clearTileImage(loc);
-    // }
-
-    // else if (keyCode == 88 && chefRow == 6 && chefCol == 4)
-    // {
-    // heldItem = "Holding: Nothing";
-    // extraText = heldItem;
-    // //System.out.println(heldItem);
-    // customer.clearTileImage(loc);
-    // }
-
-    // else if (keyCode == 88 && chefRow == 6 && chefCol == 5)
-    // {
-    // heldItem = "Holding: Nothing";  
-    // extraText = heldItem;
-    // //System.out.println(heldItem);
-    // customer.clearTileImage(loc);
-    // }
-
+    
 
   }
   
 }
+
 
 
 
@@ -380,18 +360,43 @@ int topRow = 0;
     //Generate a random number
     double random = Math.random();
     //10% of the time, decide to add an enemy image to a Tile
-   if (random < 0.01)
+   if (random < 0.15)
    {
     level1Grid.setTileImage(loc, customer);
     System.out.println("Adding customer to " + loc);
    }
   }
+
+  
+}
+
+public void placeItem(int c){
+
+  int orderRow = 5;
+
+  GridLocation loc1 = new GridLocation(orderRow, c);
+
+  double random1 = Math.random();
+
+  if (random1 < 0.50)
+  {
+  level1Grid.setTileImage(loc1, burger);  
+  }  
+
+  else if (random1 < 0.75)
+  {
+  level1Grid.setTileImage(loc1, fries);
+  }
+
+  else
+  {
+  level1Grid.setTileImage(loc1, cola);
+  }
+  
+  System.out.println("item placed");
   
 
 }
-
-
-
 
 
 
@@ -400,7 +405,7 @@ int topRow = 0;
 public void moveCustomers(){
 
 //Loop through all of the rows & cols in the grid
-for (int r = 0; r < 4; r++){
+for (int r = 3; r >= 0; r--){
   for (int c = 2; c <= 5; c++){
     GridLocation loc = new GridLocation(r,c);
   
@@ -408,14 +413,19 @@ for (int r = 0; r < 4; r++){
     if(level1Grid.getTileImage(loc) == customer){
 
       //check if you SHOULD move the customer forward in line (no cust or counter in front)
-      if(true){
+    GridLocation nextLoc = new GridLocation(r+1,c);
+    if(level1Grid.getTileImage(nextLoc) != customer ){
         //eraser customer from current location
         level1Grid.clearTileImage(loc);
 
-        GridLocation newLoc = new GridLocation(r+1, c);
-
-        level1Grid.setTileImage(newLoc, customer);
+        level1Grid.setTileImage(nextLoc, customer);
           //System.out.println("moving customer"); 
+
+        if (r == 3)
+        {
+          placeItem(c);
+        }
+
       }
 
     } 
