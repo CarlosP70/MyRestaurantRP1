@@ -72,7 +72,7 @@ GridLocation line4Loc = new GridLocation(line4Row, line4Col);
 //EndScreen variables
 World endScreen;
 PImage endBg;
-String endBgFile = "images/youwin.png";
+String endBgFile = "images/Game_Over.png";
 
 
 //VARIABLES: Tracking the current Screen being displayed
@@ -227,7 +227,6 @@ void keyPressed(){
 
 
 }
-
 //Known Processing method that automatically will run when a mouse click triggers it
 void mouseClicked(){
   
@@ -485,8 +484,25 @@ public boolean checkCollision(GridLocation loc, GridLocation nextLoc){
 
 //method to indicate when the main game is over
 public boolean isGameOver(){
-  
-  return false; //by default, the game is never over
+  GridLocation firstCol = new GridLocation(0, 2);
+  GridLocation secondCol = new GridLocation(0, 3);
+  GridLocation thirdCol = new GridLocation(0, 4);
+  GridLocation fourthCol = new GridLocation(0, 5);
+  if(level1Grid.hasTileImage(firstCol) == true){
+    return true;
+  }
+  else if(level1Grid.hasTileImage(secondCol) == true){
+    return true;
+  }
+  else if(level1Grid.hasTileImage(thirdCol) == true){
+    return true;
+  }
+  else if(level1Grid.hasTileImage(fourthCol) == true){
+    return true;
+  }
+  else{
+    return false; //by default, the game is never over
+  }
 }
 
 //method to describe what happens after the game is over
