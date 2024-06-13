@@ -11,7 +11,6 @@
 String titleText = "Crazy Chef";
 String heldItem = "Holding: Nothing";
 String extraText = heldItem;
-int served = 0;
 
 //VARIABLES: Splash Screen
 Screen splashScreen;
@@ -27,7 +26,7 @@ PImage chef;
 String chefFile = "images/Chef_Player_2.gif";
 int chefRow = 7;
 int chefCol = 1;
-int health = 1;
+int served = 0;
 
 PImage customer;
 String customerFile = "images/Customer_1.png";
@@ -266,7 +265,7 @@ public void deliver(){
 
 
     //Check if in front of any lines
-if (keyCode == 88){
+if (keyCode == 69){
 
     if(chefRow == 6 && (chefCol == 2 || chefCol == 3  || chefCol == 4 || chefCol == 5))
     {
@@ -410,7 +409,7 @@ public void updateTitleBar(){
 
   if(!isGameOver()) {
     //set the title each loop
-    surface.setTitle(titleText + "    " + extraText + " " + health);
+    surface.setTitle(titleText + "    " + extraText + " " + served);
 
     //adjust the extra text as desired
   
