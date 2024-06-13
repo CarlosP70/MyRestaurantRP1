@@ -11,7 +11,6 @@
 String titleText = "Crazy Chef";
 String heldItem = "Holding: Nothing";
 String extraText = heldItem;
-int served = 0;
 
 //VARIABLES: Splash Screen
 Screen splashScreen;
@@ -265,7 +264,7 @@ public void deliver(){
 
 
 
-    //Check if in front of any lines, X
+    //Check if in front of any lines, E
 if (keyCode == 69){
 
     if(chefRow == 6 && (chefCol == 2 || chefCol == 3  || chefCol == 4 || chefCol == 5))
