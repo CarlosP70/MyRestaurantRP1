@@ -11,15 +11,16 @@
 String titleText = "Crazy Chef";
 String heldItem = "Holding: Nothing";
 String extraText = heldItem;
+int served = 0;
 
 //VARIABLES: Splash Screen
 Screen splashScreen;
-String splashBgFile = "images/apcsa.png";
+String splashBgFile = "images/Title_Screen.png";
 PImage splashBg;
 
 //VARIABLES: Level1Grid Screen
 Grid level1Grid;
-String level1BgFile = "images/wooden_plank_2.png";
+String level1BgFile = "images/wooden_plank_3.png";
 PImage level1Bg;
 
 PImage chef;
