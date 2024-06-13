@@ -250,22 +250,128 @@ void mouseClicked(){
 
 //deliver method
 public void deliver(){
+ 
+ GridLocation customerLoc1 = new GridLocation(4,2);
+ GridLocation customerLoc2 = new GridLocation(4,3);
+ GridLocation customerLoc3 = new GridLocation(4,4);
+ GridLocation customerLoc4 = new GridLocation(4,5);
+ GridLocation order1 = new GridLocation(5,2);
+ GridLocation order2 = new GridLocation(5,3);
+ GridLocation order3 = new GridLocation(5,4);
+ GridLocation order4 = new GridLocation(5,5);
 
-  if (keyCode == 88){
+
+
+
 
     //Check if in front of any lines
+if (keyCode == 88){
+
     if(chefRow == 6 && (chefCol == 2 || chefCol == 3  || chefCol == 4 || chefCol == 5))
+    {
+
+    if (level1Grid.getTileImage(order1) == burger  && heldItem == "Holding: Burger")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
     //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc1);
+    }
+
+   else if (level1Grid.getTileImage(order2) == burger  && heldItem == "Holding: Burger")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc2);
+    }
+
+    else if (level1Grid.getTileImage(order3) == burger  && heldItem == "Holding: Burger")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc3);
+    }
+
+    else if (level1Grid.getTileImage(order4) == burger  && heldItem == "Holding: Burger")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc4);
+    }
+
+   else if (level1Grid.getTileImage(order1) == fries  && heldItem == "Holding: Fries")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc1);
+    }
+
+   else if (level1Grid.getTileImage(order2) == fries  && heldItem == "Holding: Fries")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc2);
+    }
+
+    else if (level1Grid.getTileImage(order3) == fries  && heldItem == "Holding: Fries")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc3);
+    }
+
+    else if (level1Grid.getTileImage(order4) == fries  && heldItem == "Holding: Fries")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc4);
+    }
+
+    if (level1Grid.getTileImage(order1) == cola  && heldItem == "Holding: Cola")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc1);
+    }
+
+   else if (level1Grid.getTileImage(order2) == cola  && heldItem == "Holding: Cola")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc2);
+    }
+
+    else if (level1Grid.getTileImage(order3) == cola  && heldItem == "Holding: Cola")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc3);
+    }
+
+    else if (level1Grid.getTileImage(order4) == cola  && heldItem == "Holding: Cola")
+    {
+    heldItem = "Holding: Nothing";
+    extraText = heldItem;
+    //System.out.println(heldItem);
+    level1Grid.clearTileImage(customerLoc4);
     }
 
     
-
+    }
+}
+    
   }
   
-}
 
 
 
