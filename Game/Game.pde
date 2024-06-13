@@ -494,7 +494,7 @@ int topRow = 0;
     //Generate a random number
     double random = Math.random();
     //10% of the time, decide to add an enemy image to a Tile
-   if (random < 0.15)
+   if (random < 0.10)
    {
     level1Grid.setTileImage(loc, customer);
     System.out.println("Adding customer to " + loc);
