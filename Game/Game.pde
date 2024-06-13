@@ -265,13 +265,13 @@ public void deliver(){
 
 
 
-    //Check if in front of any lines
-if (keyCode == 88){
+    //Check if in front of any lines, X
+if (keyCode == 69){
 
     if(chefRow == 6 && (chefCol == 2 || chefCol == 3  || chefCol == 4 || chefCol == 5))
     {
 
-    if(level1Grid.getTileImage(order1) == burger && level1Grid.getTileImage(customerLoc1) == customer && heldItem == "Holding: Burger")
+    if(level1Grid.getTileImage(order1) == burger && chefCol == 2 && heldItem == "Holding: Burger")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -281,7 +281,7 @@ if (keyCode == 88){
     served++;
     }
 
-   else if(level1Grid.getTileImage(order2) == burger && level1Grid.getTileImage(customerLoc2) == customer && heldItem == "Holding: Burger")
+   else if(level1Grid.getTileImage(order2) == burger && chefCol == 3 && heldItem == "Holding: Burger")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -291,7 +291,7 @@ if (keyCode == 88){
     served++;
     }
 
-    else if(level1Grid.getTileImage(order3) == burger && level1Grid.getTileImage(customerLoc3) == customer && heldItem == "Holding: Burger")
+    else if(level1Grid.getTileImage(order3) == burger && chefCol == 4 && heldItem == "Holding: Burger")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -301,7 +301,7 @@ if (keyCode == 88){
     served++;
     }
 
-    else if(level1Grid.getTileImage(order4) == burger && level1Grid.getTileImage(customerLoc4) == customer && heldItem == "Holding: Burger")
+    else if(level1Grid.getTileImage(order4) == burger && chefCol == 5 && heldItem == "Holding: Burger")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -311,7 +311,7 @@ if (keyCode == 88){
     served++;
     }
 
-   else if(level1Grid.getTileImage(order1) == fries && level1Grid.getTileImage(customerLoc1) == customer && heldItem == "Holding: Fries")
+   else if(level1Grid.getTileImage(order1) == fries && chefCol == 2 && heldItem == "Holding: Fries")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -321,7 +321,7 @@ if (keyCode == 88){
     served++;
     }
 
-   else if(level1Grid.getTileImage(order2) == fries && level1Grid.getTileImage(customerLoc2) == customer && heldItem == "Holding: Fries")
+   else if(level1Grid.getTileImage(order2) == fries && chefCol == 3 && heldItem == "Holding: Fries")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -331,7 +331,7 @@ if (keyCode == 88){
     served++;
     }
 
-    else if(level1Grid.getTileImage(order3) == fries && level1Grid.getTileImage(customerLoc3) == customer && heldItem == "Holding: Fries")
+    else if(level1Grid.getTileImage(order3) == fries && chefCol == 4 && heldItem == "Holding: Fries")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -341,7 +341,7 @@ if (keyCode == 88){
     served++;
     }
 
-    else if(level1Grid.getTileImage(order4) == fries && level1Grid.getTileImage(customerLoc4) == customer && heldItem == "Holding: Fries")
+    else if(level1Grid.getTileImage(order4) == fries && chefCol == 5  && heldItem == "Holding: Fries")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -351,7 +351,7 @@ if (keyCode == 88){
     served++;
     }
 
-    if(level1Grid.getTileImage(order1) == cola && level1Grid.getTileImage(customerLoc1) == customer && heldItem == "Holding: Cola")
+    if(level1Grid.getTileImage(order1) == cola && chefCol == 2 && heldItem == "Holding: Cola")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -361,7 +361,7 @@ if (keyCode == 88){
     served++;
     }
 
-   else if(level1Grid.getTileImage(order2) == cola && level1Grid.getTileImage(customerLoc2) == customer && heldItem == "Holding: Cola")
+   else if(level1Grid.getTileImage(order2) == cola && chefCol == 3 && heldItem == "Holding: Cola")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -371,7 +371,7 @@ if (keyCode == 88){
     served++;
     }
 
-    else if(level1Grid.getTileImage(order3) == cola && level1Grid.getTileImage(customerLoc3) == customer && heldItem == "Holding: Cola")
+    else if(level1Grid.getTileImage(order3) == cola && chefCol == 4 && heldItem == "Holding: Cola")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -381,7 +381,7 @@ if (keyCode == 88){
     served++;
     }
 
-    else if(level1Grid.getTileImage(order4) == cola && level1Grid.getTileImage(customerLoc4) == customer && heldItem == "Holding: Cola")
+    else if(level1Grid.getTileImage(order4) == cola && chefCol == 5 && heldItem == "Holding: Cola")
     {
     heldItem = "Holding: Nothing";
     extraText = heldItem;
@@ -410,7 +410,7 @@ public void updateTitleBar(){
 
   if(!isGameOver()) {
     //set the title each loop
-    surface.setTitle(titleText + "    " + extraText + " " + health);
+    surface.setTitle(titleText + "    " + extraText + " " + " " + "Customers Served: " + served);
 
     //adjust the extra text as desired
   
