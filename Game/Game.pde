@@ -11,6 +11,7 @@
 String titleText = "Crazy Chef";
 String heldItem = "Holding: Nothing";
 String extraText = heldItem;
+int served = 0;
 
 //VARIABLES: Splash Screen
 Screen splashScreen;
@@ -276,6 +277,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc1);
+    level1Grid.clearTileImage(order1);
+    served++;
     }
 
    else if(level1Grid.getTileImage(order2) == burger && level1Grid.getTileImage(customerLoc2) == customer && heldItem == "Holding: Burger")
@@ -284,6 +287,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc2);
+    level1Grid.clearTileImage(order2);
+    served++;
     }
 
     else if(level1Grid.getTileImage(order3) == burger && level1Grid.getTileImage(customerLoc3) == customer && heldItem == "Holding: Burger")
@@ -292,6 +297,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc3);
+    level1Grid.clearTileImage(order3);
+    served++;
     }
 
     else if(level1Grid.getTileImage(order4) == burger && level1Grid.getTileImage(customerLoc4) == customer && heldItem == "Holding: Burger")
@@ -300,6 +307,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc4);
+    level1Grid.clearTileImage(order4);
+    served++;
     }
 
    else if(level1Grid.getTileImage(order1) == fries && level1Grid.getTileImage(customerLoc1) == customer && heldItem == "Holding: Fries")
@@ -308,6 +317,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc1);
+    level1Grid.clearTileImage(order1);
+    served++;
     }
 
    else if(level1Grid.getTileImage(order2) == fries && level1Grid.getTileImage(customerLoc2) == customer && heldItem == "Holding: Fries")
@@ -316,6 +327,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc2);
+    level1Grid.clearTileImage(order2);
+    served++;
     }
 
     else if(level1Grid.getTileImage(order3) == fries && level1Grid.getTileImage(customerLoc3) == customer && heldItem == "Holding: Fries")
@@ -324,6 +337,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc3);
+    level1Grid.clearTileImage(order3);
+    served++;
     }
 
     else if(level1Grid.getTileImage(order4) == fries && level1Grid.getTileImage(customerLoc4) == customer && heldItem == "Holding: Fries")
@@ -332,6 +347,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc4);
+    level1Grid.clearTileImage(order4);
+    served++;
     }
 
     if(level1Grid.getTileImage(order1) == cola && level1Grid.getTileImage(customerLoc1) == customer && heldItem == "Holding: Cola")
@@ -340,6 +357,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc1);
+    level1Grid.clearTileImage(order1);
+    served++;
     }
 
    else if(level1Grid.getTileImage(order2) == cola && level1Grid.getTileImage(customerLoc2) == customer && heldItem == "Holding: Cola")
@@ -348,6 +367,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc2);
+    level1Grid.clearTileImage(order2);
+    served++;
     }
 
     else if(level1Grid.getTileImage(order3) == cola && level1Grid.getTileImage(customerLoc3) == customer && heldItem == "Holding: Cola")
@@ -356,6 +377,8 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc3);
+    level1Grid.clearTileImage(order3);
+    served++;
     }
 
     else if(level1Grid.getTileImage(order4) == cola && level1Grid.getTileImage(customerLoc4) == customer && heldItem == "Holding: Cola")
@@ -364,6 +387,9 @@ if (keyCode == 88){
     extraText = heldItem;
     //System.out.println(heldItem);
     level1Grid.clearTileImage(customerLoc4);
+    level1Grid.clearTileImage(order4);
+    served++;
+
     }
 
     
