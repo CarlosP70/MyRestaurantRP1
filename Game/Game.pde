@@ -494,11 +494,16 @@ int topRow = 0;
     //Generate a random number
     double random = Math.random();
     //10% of the time, decide to add an enemy image to a Tile
-   if (random < 0.10)
-   {
-    level1Grid.setTileImage(loc, customer);
-    System.out.println("Adding customer to " + loc);
-   }
+    if ( (served < 10 && random < 0.100)
+    || (served >=10 && served < 20 && random <0.125)
+    || (served >=20 && served < 30 & random < 0.150)
+    || (served >=30 && served < 40 && random < 0.175)
+    || (served >=40 && served < 50 && random < 0.200)
+    )
+    {
+      level1Grid.setTileImage(loc, customer);
+      System.out.println("Adding customer to " + loc);
+    }
   }
 
   
